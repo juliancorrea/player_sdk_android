@@ -73,6 +73,19 @@ import static android.content.ContentValues.TAG;
  */
 public class SambaPlayer extends FrameLayout {
 
+    Activity reactNativeActivity;
+
+    public void setReactNativeActivity(Activity reactNativeActivity) {
+        this.reactNativeActivity = reactNativeActivity;
+    }
+
+    protected Activity getActivity() {
+        if(reactNativeActivity != null)
+            return reactNativeActivity;
+        return ((Activity) getContext());
+    }
+
+
     private final Player.DefaultEventListener playerEventListener = new Player.DefaultEventListener() {
 
         @Override
@@ -150,7 +163,7 @@ public class SambaPlayer extends FrameLayout {
                     errorTimer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                            getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     // on buffer timeout disable ABR (sets to lower)
@@ -858,6 +871,7 @@ public class SambaPlayer extends FrameLayout {
 
         playerInstanceDefault = new PlayerInstanceDefault(getContext(), media);
         simplePlayerView = new SambaSimplePlayerView(getContext(), this);
+        simplePlayerView.setReactNativeActivity(reactNativeActivity);
         player = playerInstanceDefault.createPlayerInstance();
         simplePlayerView.setPlayer(player);
         simplePlayerView.setVideoTitle(media.title);
@@ -1085,7 +1099,7 @@ public class SambaPlayer extends FrameLayout {
         progressTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                ((Activity) getContext()).runOnUiThread(progressDispatcher);
+                getActivity().runOnUiThread(progressDispatcher);
             }
         }, 0, 250);
     }

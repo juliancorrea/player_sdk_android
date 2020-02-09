@@ -66,6 +66,19 @@ import static android.view.accessibility.CaptioningManager.CaptionStyle.EDGE_TYP
 
 public class SambaSimplePlayerView implements View.OnClickListener {
 
+
+    Activity reactNativeActivity;
+
+    public void setReactNativeActivity(Activity reactNativeActivity) {
+        this.reactNativeActivity = reactNativeActivity;
+    }
+
+    protected Activity getActivity() {
+        if(reactNativeActivity != null)
+            return reactNativeActivity;
+        return ((Activity) context);
+    }
+
     private Context context;
     private FrameLayout playerContainer;
     private SimpleExoPlayer player;
@@ -399,7 +412,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
 
     private void initOutputMenu(final PlayerMediaSourceInterface playerMediaSource, Format currentOutput, boolean isAbrEnabled) {
         final TrackGroup outputs = playerMediaSource.getVideoOutputsTracks();
-        outputSheetView = ((Activity) context).getLayoutInflater().inflate(R.layout.action_sheet, null);
+        outputSheetView = getActivity().getLayoutInflater().inflate(R.layout.action_sheet, null);
         TextView title = outputSheetView.findViewById(R.id.action_sheet_title);
         title.setText(context.getString(R.string.output));
         final ListView menuList = outputSheetView.findViewById(R.id.sheet_list);
@@ -425,7 +438,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
     }
 
     private void initSpeedMenu() {
-        speedSheetView = ((Activity) context).getLayoutInflater().inflate(R.layout.action_sheet, null);
+        speedSheetView = getActivity().getLayoutInflater().inflate(R.layout.action_sheet, null);
         TextView title = speedSheetView.findViewById(R.id.action_sheet_title);
         title.setText(context.getString(R.string.speed));
         final ListView menuList = speedSheetView.findViewById(R.id.sheet_list);
