@@ -302,7 +302,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
                 playerView.showController();
             }
             if (isFullscreen) {
-                ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(mFullScreenFlags);
+                getActivity().getWindow().getDecorView().setSystemUiVisibility(mFullScreenFlags);
             }
         }
     };
@@ -381,7 +381,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
 
     private void initCaptionMenu(final PlayerMediaSourceInterface playerMediaSource, Format currentCaption) {
         final TrackGroupArray captions = playerMediaSource.getSubtitles();
-        captionSheetView = ((Activity) context).getLayoutInflater().inflate(R.layout.action_sheet, null);
+        captionSheetView = getActivity().getLayoutInflater().inflate(R.layout.action_sheet, null);
         TextView title = captionSheetView.findViewById(R.id.action_sheet_title);
         title.setText(context.getString(R.string.captions));
         final ListView menuList = captionSheetView.findViewById(R.id.sheet_list);
@@ -488,7 +488,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
                     playerView.showController();
                 }
                 if (isFullscreen) {
-                    ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(mFullScreenFlags);
+                    getActivity().getWindow().getDecorView().setSystemUiVisibility(mFullScreenFlags);
                 }
             }
         });
@@ -571,7 +571,7 @@ public class SambaSimplePlayerView implements View.OnClickListener {
     public void setFullscreen(boolean newValue, boolean isReverseLandscape) {
         if (this.isFullscreen == newValue && this.isReverseLandscape == isReverseLandscape) return;
         if (fullscreenCallback == null) return;
-        final Activity activity = (Activity) context;
+        final Activity activity = getActivity();
         if (newValue == false) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

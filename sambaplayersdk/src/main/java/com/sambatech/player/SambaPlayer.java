@@ -244,7 +244,7 @@ public class SambaPlayer extends FrameLayout {
                         @Override
                         public void onSuccess(String response) {
                             // check whether it can fallback (changes error criticity) or fail otherwise
-                            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                            getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     if (_currentBackupIndex < media.backupUrls.length) {
@@ -285,7 +285,7 @@ public class SambaPlayer extends FrameLayout {
                 errorTimer.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
-                        ((Activity) getContext()).runOnUiThread(new Runnable() {
+                        getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 if (secs.get() == 0) {
@@ -1049,7 +1049,7 @@ public class SambaPlayer extends FrameLayout {
 
     private void showError(@NonNull SambaPlayerError error) {
         if (errorScreen == null)
-            errorScreen = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.error_screen, this, false);
+            errorScreen = getActivity().getLayoutInflater().inflate(R.layout.error_screen, this, false);
 
         TextView textView = (TextView) errorScreen.findViewById(R.id.error_message);
         textView.setText(error.toString());
