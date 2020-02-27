@@ -1,13 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.sonarqube'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion safeExtGet("compileSdkVersion", 28)
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 28
+        minSdkVersion safeExtGet('minSdkVersion', 17)
+        targetSdkVersion safeExtGet('targetSdkVersion', 28)
         versionCode 41
         versionName "v0.14.3-beta"
     }
