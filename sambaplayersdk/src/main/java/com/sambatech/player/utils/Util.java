@@ -23,6 +23,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.facebook.react.views.view.ReactViewGroup;
+
 
 /**
  * Contains utility functions which are used by a number of other classes.
@@ -58,14 +60,16 @@ public class Util {
     if (parent instanceof LinearLayout) {
       return new LinearLayout.LayoutParams(width, height);
     }
+    else
+      return new ReactViewGroup.LayoutParams(width, height);
 
     // Throw this exception if the parent is not the correct type.
-    IllegalArgumentException exception = new IllegalArgumentException("The PARENT of a " +
-        "FrameLayout container used by the GoogleMediaFramework must be a LinearLayout, " +
-        "FrameLayout, or RelativeLayout. Please ensure that the container is inside one of these " +
-        "three supported view groups.");
-
-    // If the parent is not one of the supported types, throw our exception.
-    throw exception;
+//    IllegalArgumentException exception = new IllegalArgumentException("The PARENT of a " +
+//        "FrameLayout container used by the GoogleMediaFramework must be a LinearLayout, " +
+//        "FrameLayout, or RelativeLayout. Please ensure that the container is inside one of these " +
+//        "three supported view groups.");
+//
+//    // If the parent is not one of the supported types, throw our exception.
+//    throw exception;
   }
 }
