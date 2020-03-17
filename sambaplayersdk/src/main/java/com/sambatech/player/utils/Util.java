@@ -60,16 +60,16 @@ public class Util {
     if (parent instanceof LinearLayout) {
       return new LinearLayout.LayoutParams(width, height);
     }
-    else
+    if(parent instanceof ReactViewGroup )
       return new ReactViewGroup.LayoutParams(width, height);
 
-    // Throw this exception if the parent is not the correct type.
-//    IllegalArgumentException exception = new IllegalArgumentException("The PARENT of a " +
-//        "FrameLayout container used by the GoogleMediaFramework must be a LinearLayout, " +
-//        "FrameLayout, or RelativeLayout. Please ensure that the container is inside one of these " +
-//        "three supported view groups.");
-//
-//    // If the parent is not one of the supported types, throw our exception.
-//    throw exception;
+//     Throw this exception if the parent is not the correct type.
+    IllegalArgumentException exception = new IllegalArgumentException("The PARENT of a " +
+        "FrameLayout container used by the GoogleMediaFramework must be a LinearLayout, " +
+        "FrameLayout, or RelativeLayout. Please ensure that the container is inside one of these " +
+        "three supported view groups.");
+
+    // If the parent is not one of the supported types, throw our exception.
+    throw exception;
   }
 }
